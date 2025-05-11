@@ -7,11 +7,11 @@ Manual extraction of such information is time-consuming and prone to errors, esp
 
 Technologies and tools used in this project include:
 
-OpenAI API for natural language understanding and extraction
-Python for scripting and integration
-Natural Language Processing (NLP) for text cleaning and analysis
-Regular Expressions and Pattern Matching for identifying clinical entities
-ICD-10 Classification Standards for code assignment
+1)OpenAI API for natural language understanding and extraction
+2)Python for scripting and integration
+3)Natural Language Processing (NLP) for text cleaning and analysis
+4)Regular Expressions and Pattern Matching for identifying clinical entities
+5)ICD-10 Classification Standards for code assignment
 
 By reducing the administrative burden and enhancing the accuracy of clinical documentation, this solution enables healthcare teams to devote more time to direct patient care and improves the efficiency of healthcare data workflows.
 ___________________________________
