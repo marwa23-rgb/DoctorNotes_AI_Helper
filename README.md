@@ -1,17 +1,25 @@
-# DoctorNotes_AI_Helper
-Automate the extraction of structured clinical data from unstructured medical transcriptions using the OpenAI API, enabling faster, more accurate documentation and diagnosis coding
-__________________________________
-This project aims to streamline medical documentation by harnessing the power of artificial intelligence to transform unstructured clinical narratives into structured, actionable data. By integrating the OpenAI API with Python-based NLP techniques, the system automates the extraction of critical medical information—such as symptoms, diagnoses, and treatments—from natural language transcripts recorded by healthcare professionals during patient encounters.
+# DoctorNotes_AI_Helper  
+**Automated Clinical Data Extraction from Medical Transcriptions**
 
-Manual extraction of such information is time-consuming and prone to errors, especially when preparing records for administrative and insurance-related purposes. To address this, the project includes a pipeline that not only extracts relevant data but also performs automated mapping to ICD-10 codes—a globally recognized standard for disease classification and billing.
+## Overview  
+This project streamlines medical documentation by leveraging artificial intelligence to convert **unstructured clinical narratives** into **structured, actionable data**. Using the **OpenAI API** and **Python-based NLP techniques**, the system extracts essential information—such as **symptoms, diagnoses, and treatments**—from natural language transcripts recorded during patient encounters.
 
-Technologies and tools used in this project include:
+## Problem Statement  
+Manual extraction of medical information is:
+- **Time-consuming**
+- **Error-prone**
+- Especially challenging for administrative and insurance documentation (e.g., ICD-10 coding)
 
-1)OpenAI API for natural language understanding and extraction
-2)Python for scripting and integration
-3)Natural Language Processing (NLP) for text cleaning and analysis
-4)Regular Expressions and Pattern Matching for identifying clinical entities
-5)ICD-10 Classification Standards for code assignment
+## Solution  
+To address this, the project implements an **automated pipeline** that:
+- Extracts relevant clinical data from free-text transcriptions
+- Cleans and processes text using **NLP techniques**
+- Identifies clinical entities using **regex and pattern matching**
+- Maps diagnoses to **ICD-10 codes**, the international standard for disease classification and billing
 
-By reducing the administrative burden and enhancing the accuracy of clinical documentation, this solution enables healthcare teams to devote more time to direct patient care and improves the efficiency of healthcare data workflows.
-___________________________________
+## Technologies Used  
+-  **OpenAI API** – for language understanding and information extraction  
+-  **Python** – for scripting and system integration  
+-  **Natural Language Processing (NLP)** – for text cleaning, tokenization, and analysis  
+-  **Regular Expressions (Regex)** – for entity recognition and pattern matching  
+-  **ICD-10 Standards** – for classification and code assignment
