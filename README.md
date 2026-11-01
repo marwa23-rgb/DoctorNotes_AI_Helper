@@ -59,15 +59,6 @@ This project reads medical transcriptions from a CSV file and uses the **OpenAI 
 | 2 | `get_icd_codes(treatment)` | Asks GPT-4o for the ICD codes of a treatment and returns them as text, or `Unknown` |
 | 3 | Loop over `df.iterrows()` | Runs both functions on every row and stores the combined result |
 
----
-
-## ⚠️ Notes and Limitations
-
-- ICD codes come straight from the language model, so they should be reviewed by a qualified coder before any real use. ICD codes mainly describe diagnoses, so a procedure may need a different code system such as CPT.
-- The notebook shows the sample data but not the final `df_structured` output.
-- Transcriptions are processed one at a time, so large files will take a while and use API credits.
-
-
 ## 👩‍💻 Author
 
 **Marwa Samy** · [GitHub](https://github.com/marwa23-rgb)
