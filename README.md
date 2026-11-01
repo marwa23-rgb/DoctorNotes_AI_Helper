@@ -1,25 +1,73 @@
-# DoctorNotes_AI_Helper  
-**Automated Clinical Data Extraction from Medical Transcriptions**
+<h1 align="center">🩺 Medical Transcription Data Extraction with OpenAI</h1>
 
-## Overview  
-This project streamlines medical documentation by leveraging artificial intelligence to convert **unstructured clinical narratives** into **structured, actionable data**. Using the **OpenAI API** and **Python-based NLP techniques**, the system extracts essential information—such as **symptoms, diagnoses, and treatments**—from natural language transcripts recorded during patient encounters.
+<p align="center">
+  Turning free-text medical transcriptions into structured data (patient age, recommended treatment and ICD codes) with GPT-4o function calling
+</p>
 
-## Problem Statement  
-Manual extraction of medical information is:
-- **Time-consuming**
-- **Error-prone**
-- Especially challenging for administrative and insurance documentation (e.g., ICD-10 coding)
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Pandas-Data%20Processing-150458?logo=pandas&logoColor=white" alt="Pandas">
+  <img src="https://img.shields.io/badge/OpenAI-GPT--4o-412991?logo=openai&logoColor=white" alt="OpenAI">
+  <img src="https://img.shields.io/badge/Google%20Colab-Notebook-F9AB00?logo=googlecolab&logoColor=white" alt="Colab">
+</p>
 
-## Solution  
-To address this, the project implements an **automated pipeline** that:
-- Extracts relevant clinical data from free-text transcriptions
-- Cleans and processes text using **NLP techniques**
-- Identifies clinical entities using **regex and pattern matching**
-- Maps diagnoses to **ICD-10 codes**, the international standard for disease classification and billing
+## 📌 Overview
 
-## Technologies Used  
--  **OpenAI API** – for language understanding and information extraction  
--  **Python** – for scripting and system integration  
--  **Natural Language Processing (NLP)** – for text cleaning, tokenization, and analysis  
--  **Regular Expressions (Regex)** – for entity recognition and pattern matching  
--  **ICD-10 Standards** – for classification and code assignment
+This project reads medical transcriptions from a CSV file and uses the **OpenAI API (GPT-4o)** to pull out structured information from each note. For every transcription it extracts the patient's **age** and the **recommended treatment or procedure**, then asks the model for the matching **ICD codes**. The results are collected into a pandas DataFrame alongside each note's medical specialty.
+
+---
+
+## ⚡ At a Glance
+
+| 📄 Sample Notes | 🏥 Specialties | 🤖 Model | 📦 Output Fields |
+|:---:|:---:|:---:|:---:|
+| **5** | **5** | **GPT-4o** | **4** |
+
+---
+
+## 🔄 Workflow
+
+1. **Load & Inspect** – Read the CSV and reviewed its columns and the first rows (`head()`, `value_counts()`).
+2. **Set Up the API** – Loaded the API key from a `.env` file with `python-dotenv` and created the OpenAI client.
+3. **Extract Age & Treatment** – Sent each transcription to GPT-4o with a function definition (`extract_medical_data`) so the reply comes back as structured JSON. Missing values are returned as `Unknown`.
+4. **Look Up ICD Codes** – Sent each recommended treatment to GPT-4o in a second call (temperature 0.3) and asked for a list of codes only. Treatments marked `Unknown` are skipped.
+5. **Build the Table** – Added each note's medical specialty and ICD code to the extracted data and converted the list of results into a DataFrame (`df_structured`).
+
+> **Input columns:** `index` · `medical_specialty` · `transcription`
+>
+> **Output columns:** `Age` · `Recommended Treatment/Procedure` · `Medical Specialty` · `ICD Code`
+
+---
+
+## 🧾 Sample Data
+
+| Index | Medical Specialty | Note Type |
+|:---:|---|---|
+| 0 | Allergy / Immunology | Clinic visit for allergic rhinitis |
+| 1 | Orthopedic | Consultation for an Achilles tendon rupture |
+| 2 | Bariatrics | Laparoscopic Roux-en-Y gastric bypass operative report |
+| 3 | Cardiovascular / Pulmonary | Tracheostomy and stent removal operative report |
+| 4 | Urology | Follow-up for urinary retention after kidney transplant |
+
+---
+
+## 🧩 How the Extraction Works
+
+| Step | Function | What it does |
+|---|---|---|
+| 1 | `extract_info_with_openai(transcription)` | Calls GPT-4o with a function definition and returns `Age` and `Recommended Treatment/Procedure` as a dictionary |
+| 2 | `get_icd_codes(treatment)` | Asks GPT-4o for the ICD codes of a treatment and returns them as text, or `Unknown` |
+| 3 | Loop over `df.iterrows()` | Runs both functions on every row and stores the combined result |
+
+---
+
+## ⚠️ Notes and Limitations
+
+- ICD codes come straight from the language model, so they should be reviewed by a qualified coder before any real use. ICD codes mainly describe diagnoses, so a procedure may need a different code system such as CPT.
+- The notebook shows the sample data but not the final `df_structured` output.
+- Transcriptions are processed one at a time, so large files will take a while and use API credits.
+
+
+## 👩‍💻 Author
+
+**Marwa Samy** · [GitHub](https://github.com/marwa23-rgb)
